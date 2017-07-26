@@ -1,5 +1,8 @@
 package edu.upm.midas.metamap.model.receiver;
+import edu.upm.midas.constants.Constants;
+
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by gerardo on 04/07/2017.
@@ -7,17 +10,19 @@ import javax.validation.constraints.NotNull;
  * @author Gerardo Lagunes G. ${EMAIL}
  * @version ${<VERSION>}
  * @project metamap_rest
- * @className TextReceiver
+ * @className Text
  * @see
  */
-public class TextReceiver {
+public class Text {
 
-    @NotNull
+    @NotNull(message = Constants.ERR_NO_PARAMETER)
+    @Size(min = 1, message = Constants.ERR_EMPTY_PARAMETER)
     private String id;
-    @NotNull
+    @NotNull(message = Constants.ERR_NO_PARAMETER)
+    @Size(min = 1, message = Constants.ERR_EMPTY_PARAMETER)
     private String text;
 
-    public TextReceiver() {
+    public Text() {
     }
 
     public String getId() {

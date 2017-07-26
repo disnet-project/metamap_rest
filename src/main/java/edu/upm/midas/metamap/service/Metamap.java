@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +28,24 @@ public class Metamap implements NLPInterface {
     private String host;
     @Value("${default_options}")
     private String default_options;
+    @NotNull
+    private List<String> semanticTypes;
+
 
     public Metamap() {}
 
     @PostConstruct
     public void setup() {
         oMmapi = new MetaMapApiImpl( host );
-        setupOptions("-y -R SNOMEDCT_US");
+        //setupOptions("-y -R SNOMEDCT_US");
     }
 
-    public void setupOptions(String option) {
-        oMmapi.setOptions(option);
+    public void setupOptions(String options) {
+        oMmapi.setOptions(options);//default_options +
+    }
+
+    public void setSemanticTypes(List<String> semanticTypes) {
+        this.semanticTypes = semanticTypes;
     }
 
     /**
@@ -51,7 +59,6 @@ public class Metamap implements NLPInterface {
     public ArrayList<Ev> performNLP(String signs_symptoms_text)
             throws Exception {
         ArrayList<Ev> conceptsList = new ArrayList<Ev>();
-        //System.out.println("HTML_A pasar a MetaMap: " + signs_symptoms_text);
         List<Result> citationsList = oMmapi
                 .processCitationsFromString( signs_symptoms_text );
 
@@ -75,45 +82,22 @@ public class Metamap implements NLPInterface {
 
     /**
      * Method to check if contains a valid semantic type.
+     * Método módificado para que se acepten los semantic types que se envían a la API
      *
      * @param semanticTypes
      *            Receive the list of semantic types of the term.
      * @return Return true or false.
      */
     private boolean isAValidSemanticType(List<String> semanticTypes) {
-        for (int i = 0; i < Constants.SEMANTIC_TYPES.length; i++) {
-
-            String validSemanticType = Constants.SEMANTIC_TYPES[i];
-
+        for (int i = 0; i < this.semanticTypes.size(); i++) {
+            String validSemanticType = this.semanticTypes.get(i);
             if (semanticTypes.contains(validSemanticType)) {
                 return true;
             }
-
         }
         return false;
     }
 
-
-    /**
-     * Método que regresa true si el source no se encuentra y false si se encuentra
-     *
-     * @param sourceId
-     * @return
-     */
-    private boolean isSource(String sourceId){
-        return Constants.SOURCES_MAP.get( sourceId ).isEmpty();
-    }
-
-
-    /**
-     * Método que regresa true si el semantic_type no se encuentra y false si se encuentra
-     *
-     * @param semanticType
-     * @return
-     */
-    private boolean isSemanticType(String semanticType){
-        return Constants.SEMANTIC_TYPES_MAP.get( semanticType ).isEmpty();
-    }
 
 
 }
