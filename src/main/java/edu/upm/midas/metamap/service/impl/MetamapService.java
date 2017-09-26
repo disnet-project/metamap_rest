@@ -6,7 +6,7 @@ import edu.upm.midas.metamap.model.response.Response;
 import edu.upm.midas.metamap.model.receiver.Request;
 import edu.upm.midas.metamap.service.Metamap;
 import edu.upm.midas.metamap.model.response.Concept;
-import edu.upm.midas.utilsservice.ReplaceUTF8;
+import edu.upm.midas.common.util.ReplaceUTF8;
 import gov.nih.nlm.nls.metamap.Ev;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +52,7 @@ public class MetamapService {
                         Concept concept = new Concept();
                         concept.setCui( conceptEv.getConceptId() );
                         concept.setName( conceptEv.getConceptName() );
-                        concept.setSemanticType( conceptEv.getSemanticTypes() );
+                        concept.setSemanticTypes( conceptEv.getSemanticTypes() );
 
                         conceptList.add( concept );
                     }// busqueda de conceptos con metamap

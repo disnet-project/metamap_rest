@@ -43,7 +43,7 @@
 
      java replace_UTF8 file > result
 */
-package edu.upm.midas.utilsservice;
+package edu.upm.midas.common.util;
 
 import org.springframework.stereotype.Service;
 

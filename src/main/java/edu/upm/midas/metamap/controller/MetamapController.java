@@ -5,6 +5,7 @@ import edu.upm.midas.metamap.service.impl.MetamapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -17,15 +18,15 @@ import javax.validation.Valid;
  * @see
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/metamap/api")
 public class MetamapController {
 
     @Autowired
     private MetamapService metamapService;
 
-    @RequestMapping(path = { "/metamap" },
+    @RequestMapping(path = { "/concepts-found" },
             method = RequestMethod.POST)
-    public Response filter(@RequestBody @Valid Request request) throws Exception {
+    public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest) throws Exception {
         return metamapService.filter( request );
     }
 

@@ -16,7 +16,7 @@ public class Concept {
 
     private String cui;/*Código cui*/
     private String name;
-    private List<String> semanticType;
+    private List<String> semanticTypes;
 
 
     public String getName() {
@@ -35,12 +35,12 @@ public class Concept {
         this.cui = cui;
     }
 
-    public List<String> getSemanticType() {
-        return semanticType;
+    public List<String> getSemanticTypes() {
+        return semanticTypes;
     }
 
-    public void setSemanticType(List<String> semanticType) {
-        this.semanticType = semanticType;
+    public void setSemanticTypes(List<String> semanticTypes) {
+        this.semanticTypes = semanticTypes;
     }
 
 

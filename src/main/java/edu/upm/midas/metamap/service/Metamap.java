@@ -1,6 +1,5 @@
 package edu.upm.midas.metamap.service;
 
-import edu.upm.midas.constants.Constants;
 import gov.nih.nlm.nls.metamap.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,6 +25,8 @@ public class Metamap implements NLPInterface {
 
     @Value("${my.host}")
     private String host;
+    @Value("${my.port}")
+    private int port;
     @Value("${default_options}")
     private String default_options;
     @NotNull
@@ -36,7 +37,9 @@ public class Metamap implements NLPInterface {
 
     @PostConstruct
     public void setup() {
-        oMmapi = new MetaMapApiImpl( host );
+        //oMmapi = new MetaMapApiImpl( host );
+        System.out.println("METAMAP_HOST: " + host.trim() + ", METAMAP_PORT:" + port);
+        oMmapi = new MetaMapApiImpl( host.trim(), port, 0 );
         //setupOptions("-y -R SNOMEDCT_US");
     }
 
@@ -65,9 +68,9 @@ public class Metamap implements NLPInterface {
         for (int j = 0; j < citationsList.size(); j++) {
             Result result = citationsList.get(j);
             for (Utterance utterance : result.getUtteranceList()) {
-                for (PCM pcm : utterance.getPCMList()) {
-                    for (Mapping map : pcm.getMappingList()) {
-                        for (Ev mapEv : map.getEvList()) {
+                for (PCM pcm : utterance.getPCMList()) {// Obtener elementos de expresiones metamap
+                    for (Mapping map : pcm.getMappingList()) {// Obtiene la lista de terminos Metamap Evaluation (Ev)
+                        for (Ev mapEv : map.getEvList()) {// Instancia de Metamap Evaluation (Ev)
                             if (isAValidSemanticType( mapEv.getSemanticTypes() )) {
                                 conceptsList.add( mapEv );
                             }
