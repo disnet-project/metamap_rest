@@ -41,7 +41,7 @@ public class TokenAuthorization {
         ValidationResponse validationResponse = authResourceService.validationServiceByToken( token );
         response.setAuthorization( validationResponse.isAuthorized() );
         response.setAuthorizationMessage( validationResponse.getMessage() );
-        response.setToken( token );
+        response.setToken( userToken );
 
         return response;
 
