@@ -1,8 +1,5 @@
-package edu.upm.midas.metamap.model.response;
+package edu.upm.midas.model.response;
 
-import edu.upm.midas.constants.Constants;
-
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**

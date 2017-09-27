@@ -1,5 +1,5 @@
-package edu.upm.midas.metamap.model.response;
-import edu.upm.midas.metamap.model.receiver.Configuration;
+package edu.upm.midas.model.response;
+import edu.upm.midas.model.receiver.Configuration;
 
 import java.util.List;
 
@@ -14,10 +14,37 @@ import java.util.List;
  */
 public class Response {
 
+    private String token;
+    private boolean authorization;
+    private String authorizationMessage;
     private Configuration configuration;
     private String validationMesssage;
     private List<Text> textList;
 
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public boolean isAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(boolean authorization) {
+        this.authorization = authorization;
+    }
+
+    public String getAuthorizationMessage() {
+        return authorizationMessage;
+    }
+
+    public void setAuthorizationMessage(String authorizationMessage) {
+        this.authorizationMessage = authorizationMessage;
+    }
 
     public Configuration getConfiguration() {
         return configuration;

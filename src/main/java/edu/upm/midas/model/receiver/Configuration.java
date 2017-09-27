@@ -1,9 +1,8 @@
-package edu.upm.midas.metamap.model.receiver;
+package edu.upm.midas.model.receiver;
 import edu.upm.midas.constants.Constants;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashMap;
 import java.util.List;
 
 /**

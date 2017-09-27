@@ -1,4 +1,4 @@
-package edu.upm.midas.metamap.model.receiver;
+package edu.upm.midas.model.receiver;
 import edu.upm.midas.constants.Constants;
 
 import javax.validation.constraints.NotNull;

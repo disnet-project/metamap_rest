@@ -1,8 +1,9 @@
-package edu.upm.midas.metamap.controller;
-import edu.upm.midas.metamap.model.response.Response;
-import edu.upm.midas.metamap.model.receiver.Request;
-import edu.upm.midas.metamap.service.impl.MetamapService;
+package edu.upm.midas.controller;
+import edu.upm.midas.model.response.Response;
+import edu.upm.midas.model.receiver.Request;
+import edu.upm.midas.service.impl.MetamapService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,8 @@ public class MetamapController {
 
     @RequestMapping(path = { "/concepts-found" },
             method = RequestMethod.POST)
-    public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest) throws Exception {
-        return metamapService.filter( request );
+    public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
+        return metamapService.filter( request, httpRequest, device );
     }
 
 }

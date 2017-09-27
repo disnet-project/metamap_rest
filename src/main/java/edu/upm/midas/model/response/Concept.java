@@ -1,4 +1,4 @@
-package edu.upm.midas.metamap.model.response;
+package edu.upm.midas.model.response;
 
 import java.util.List;
 import java.util.Objects;

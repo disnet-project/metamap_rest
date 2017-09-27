@@ -1,4 +1,4 @@
-package edu.upm.midas.metamap.service;
+package edu.upm.midas.service;
 
 import gov.nih.nlm.nls.metamap.Ev;
 
