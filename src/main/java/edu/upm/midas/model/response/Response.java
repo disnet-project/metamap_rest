@@ -17,6 +17,7 @@ public class Response {
     private String token;
     private boolean authorization;
     private String authorizationMessage;
+
     private Configuration configuration;
     private String validationMesssage;
     private List<Text> textList;
