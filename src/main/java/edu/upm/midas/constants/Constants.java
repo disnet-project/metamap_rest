@@ -260,4 +260,62 @@ public class Constants {
     public final static String RESPONSE_INVALID_SOURCES = "Invalid source list";
     public final static String RESPONSE_SEMANTIC_TYPES = "Invalid semantic type list";
 
+    public String ERR_CODE_000 = "000";
+    public String ERR_CODE_001 = "001";
+    public String ERR_CODE_002 = "002";
+    public String ERR_CODE_003 = "003";
+    public String ERR_CODE_004 = "004";
+    public String ERR_CODE_005 = "005";
+    public String ERR_CODE_006 = "006";
+    public String ERR_CODE_007 = "007";
+    public String ERR_CODE_008 = "008";
+    public String ERR_CODE_009 = "009";
+    public String ERR_CODE_010 = "010";
+
+
+    /* GETTERS*/
+
+    public String ERR_CODE_000() {
+        return ERR_CODE_000;
+    }
+
+    public String ERR_CODE_001() {
+        return ERR_CODE_001;
+    }
+
+    public String ERR_CODE_002() {
+        return ERR_CODE_002;
+    }
+
+    public String ERR_CODE_003() {
+        return ERR_CODE_003;
+    }
+
+    public String ERR_CODE_004() {
+        return ERR_CODE_004;
+    }
+
+    public String ERR_CODE_005() {
+        return ERR_CODE_005;
+    }
+
+    public String ERR_CODE_006() {
+        return ERR_CODE_006;
+    }
+
+    public String ERR_CODE_007() {
+        return ERR_CODE_007;
+    }
+
+    public String ERR_CODE_008() {
+        return ERR_CODE_008;
+    }
+
+    public String ERR_CODE_009() {
+        return ERR_CODE_009;
+    }
+
+    public String ERR_CODE_010() {
+        return ERR_CODE_010;
+    }
 }
