@@ -40,7 +40,9 @@ public class MetamapService {
         Response response = validate( request, httpRequest, device );
         List<Text> textList = new ArrayList<>();
 
+/*
         if (response.isAuthorization()) {
+*/
             if (response.getValidationMesssage().equals(Constants.OK)) {
                 String sources = getSourceFormat(response.getConfiguration().getSources());
                 metamap.setupOptions(request.getConfiguration().getOptions() + " " + sources);
@@ -68,7 +70,9 @@ public class MetamapService {
                 }// recorrido de textos enviados
                 response.setTextList(textList);
             }
+/*
         }
+*/
 
         return response;
     }
@@ -79,11 +83,14 @@ public class MetamapService {
      * @return
      */
     public Response validate(Request request, HttpServletRequest httpRequest, Device device){
-        //Response response = new Response();
+        Response response = new Response();
         //Validación de autorización para operar con esta api
-        Response response = tokenAuthorization.validateService(request.getToken(), request.getConfiguration(), httpRequest.getServletPath(), device);
+        //NO necesita ser autorizada, porque es para uso interno, no público
+        //Response response = tokenAuthorization.validateService(request.getToken(), request.getConfiguration(), httpRequest.getServletPath(), device);
 
+/*
         if (response.isAuthorization()) {
+*/
 
             boolean validSourceList = isAValidSourceList(request.getConfiguration().getSources());
             boolean validSemanticTypeList = isAValidSemanticTypesList(request.getConfiguration().getSemanticTypes());
@@ -100,7 +107,9 @@ public class MetamapService {
             } else {
                 response.setValidationMesssage(Constants.RESPONSE_SEMANTIC_TYPES);
             }
+/*
         }
+*/
 
         return response;
     }

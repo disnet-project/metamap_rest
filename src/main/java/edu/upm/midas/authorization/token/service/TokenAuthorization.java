@@ -40,6 +40,7 @@ public class TokenAuthorization {
 
     public Response validateService(String userToken, Configuration configuration, String path, Device device){
         Response response = new Response();
+/*
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String token = jwtTokenUtil.generateToken( userToken, gson.toJson(configuration), path, device );
 
@@ -48,6 +49,7 @@ public class TokenAuthorization {
         response.setAuthorization( validationResponse.isAuthorized() );
         response.setAuthorizationMessage( validationResponse.getMessage() );
         response.setToken( userToken );
+*/
 
         return response;
 

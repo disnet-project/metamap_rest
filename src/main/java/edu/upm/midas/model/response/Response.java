@@ -14,15 +14,18 @@ import java.util.List;
  */
 public class Response {
 
+/*
     private String token;
     private boolean authorization;
     private String authorizationMessage;
+*/
 
     private Configuration configuration;
     private String validationMesssage;
     private List<Text> textList;
 
 
+/*
     public String getToken() {
         return token;
     }
@@ -46,6 +49,7 @@ public class Response {
     public void setAuthorizationMessage(String authorizationMessage) {
         this.authorizationMessage = authorizationMessage;
     }
+*/
 
     public Configuration getConfiguration() {
         return configuration;

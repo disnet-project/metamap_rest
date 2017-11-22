@@ -18,10 +18,12 @@ import java.util.List;
  */
 public class Request {
 
+/*
     @Valid
     @NotNull(message = Constants.ERR_NO_PARAMETER)
     @NotEmpty(message = Constants.ERR_EMPTY_PARAMETER)
     private String token;
+*/
     @Valid
     @NotNull(message = Constants.ERR_NO_PARAMETER)
     private Configuration configuration;
@@ -31,6 +33,7 @@ public class Request {
     private List<Text> textList;
 
 
+/*
     public String getToken() {
         return token;
     }
@@ -38,6 +41,7 @@ public class Request {
     public void setToken(String token) {
         this.token = token;
     }
+*/
 
     public Configuration getConfiguration() {
         return configuration;

@@ -6,9 +6,9 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
-@EnableFeignClients
-@EnableCircuitBreaker
-@EnableHystrix
+//@EnableFeignClients
+//@EnableCircuitBreaker
+//@EnableHystrix
 @SpringBootApplication
 public class MetamapRestApplication {
 
