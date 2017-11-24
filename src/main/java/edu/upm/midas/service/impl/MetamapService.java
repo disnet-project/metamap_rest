@@ -86,7 +86,7 @@ public class MetamapService {
         Response response = new Response();
         //Validación de autorización para operar con esta api
         //NO necesita ser autorizada, porque es para uso interno, no público
-        //Response response = tokenAuthorization.validateService(request.getToken(), request.getConfiguration(), httpRequest.getServletPath(), device);
+        //Response response = tokenAuthorization.validateService(request.getToken(), httpRequest.getQueryString(), httpRequest.getRequestURL().toString(), device);
 
 /*
         if (response.isAuthorization()) {

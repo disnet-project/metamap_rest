@@ -38,11 +38,11 @@ public class TokenAuthorization {
     private String authorization_path;
 
 
-    public Response validateService(String userToken, Configuration configuration, String path, Device device){
+    public Response validateService(String userToken, Configuration configuration, String url, Device device){
         Response response = new Response();
 /*
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String token = jwtTokenUtil.generateToken( userToken, gson.toJson(configuration), path, device );
+        String token = jwtTokenUtil.generateToken( userToken, gson.toJson(configuration), url, device );
 
         System.out.println( "Call Authorization API... (" + authorization_url + authorization_path + ")");
         ValidationResponse validationResponse = authResourceService.validationServiceByToken( token );
