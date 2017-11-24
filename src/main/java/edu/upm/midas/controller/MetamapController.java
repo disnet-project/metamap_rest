@@ -19,13 +19,13 @@ import javax.validation.Valid;
  * @see
  */
 @RestController
-//@RequestMapping("${my.service.rest.request.mapping.general.url}")
+@RequestMapping("${my.service.rest.request.mapping.general.url}")
 public class MetamapController {
 
     @Autowired
     private MetamapService metamapService;
 
-    @RequestMapping(path =  {  "${my.service.rest.request.mapping.general.url}" /*"${my.service.rest.request.mapping.filter.path}"*/ },
+    @RequestMapping(path =  {  "${my.service.rest.request.mapping.filter.path}" },
             method = RequestMethod.POST)
     public Response filter(@RequestBody @Valid Request request, HttpServletRequest httpRequest, Device device) throws Exception {
         return metamapService.filter( request, httpRequest, device );
