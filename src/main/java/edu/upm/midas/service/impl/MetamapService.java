@@ -1,12 +1,13 @@
 package edu.upm.midas.service.impl;
 
 import edu.upm.midas.authorization.token.service.TokenAuthorization;
+import edu.upm.midas.common.util.Common;
 import edu.upm.midas.common.util.ReplaceUTF8;
 import edu.upm.midas.constants.Constants;
-import edu.upm.midas.model.response.Text;
-import edu.upm.midas.model.response.Response;
 import edu.upm.midas.model.receiver.Request;
 import edu.upm.midas.model.response.Concept;
+import edu.upm.midas.model.response.Response;
+import edu.upm.midas.model.response.Text;
 import edu.upm.midas.service.Metamap;
 import gov.nih.nlm.nls.metamap.Ev;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class MetamapService {
     private TokenAuthorization tokenAuthorization;
     @Autowired
     private ReplaceUTF8 replaceUTF8;
+    @Autowired
+    private Common common;
 
     public Response filter(Request request, HttpServletRequest httpRequest, Device device) throws Exception{
         Response response = validate( request, httpRequest, device );
@@ -45,12 +48,19 @@ public class MetamapService {
 */
             if (response.getValidationMesssage().equals(Constants.OK)) {
                 String sources = getSourceFormat(response.getConfiguration().getSources());
+                if (!common.isEmpty(sources)){//Si existen sources agregará la configuración -R de metamap y la eliminará
+                                              // de las opciones, si es que existe
+                    sources = Constants.MM_OPTION_RESOURCE_LIST + " " + sources;
+                    request.getConfiguration().getOptions().replace(Constants.MM_OPTION_RESOURCE_LIST, "");
+                }
                 metamap.setupOptions(request.getConfiguration().getOptions() + " " + sources);
                 metamap.setSemanticTypes(request.getConfiguration().getSemanticTypes());
 
+                int countText = 1;
                 for (edu.upm.midas.model.receiver.Text textReceiver : request.getTextList()) {
+                    System.out.println("("+countText+") Filter text: " + textReceiver.getId());//INFO
                     String textNonAscii = replaceUTF8.replaceLooklike(textReceiver.getText());
-
+                    //System.out.println("Procesado:" + textNonAscii+ "--");
                     if (!textNonAscii.isEmpty()) {
                         Text text = new Text();
                         text.setId(textReceiver.getId());
@@ -61,12 +71,25 @@ public class MetamapService {
                             concept.setCui(conceptEv.getConceptId());
                             concept.setName(conceptEv.getConceptName());
                             concept.setSemanticTypes(conceptEv.getSemanticTypes());
+                            concept.setMatchedWords(conceptEv.getMatchedWords());
+                            concept.setPositionalInfo(conceptEv.getPositionalInfo().toString());
+                            //System.out.println("getMatchedWords: "+conceptEv.getMatchedWords().toString());//OK
+                            //System.out.println("getPositionalInfo: "+conceptEv.getPositionalInfo().toString());//OK
+                            //System.out.println("getMatchMapList: "+conceptEv.getMatchMapList().toString());//NO
+                            //System.out.println("getPreferredName: "+conceptEv.getPreferredName());//OK, NO porque es el nombre del termino
+                            //System.out.println("getTerm: "+conceptEv.getTerm());//NO
+                            //System.out.println("getPruningStatus: "+conceptEv.getPruningStatus());//NO
+                            //System.out.println("getNegationStatus: "+conceptEv.getNegationStatus());//NO
+                            //System.out.println("toString: "+conceptEv.toString());//NO
+                            System.out.println( "   Concept found in the text..." + concept.toString() );
 
                             conceptList.add(concept);
                         }// busqueda de conceptos con metamap
+                        if (conceptList.size() <= 0) System.out.println( "   Concept not found in the text...");
                         text.setConcepts(conceptList);
                         textList.add(text);
                     }// validación del texto no vacío
+                    countText++;
                 }// recorrido de textos enviados
                 response.setTextList(textList);
             }

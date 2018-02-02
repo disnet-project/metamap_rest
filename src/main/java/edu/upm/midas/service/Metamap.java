@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +37,18 @@ public class Metamap implements NLPInterface {
     public Metamap() {}
 
     @PostConstruct
-    public void setup() {
+    public void setup() throws IOException {
         //oMmapi = new MetaMapApiImpl( host );
         System.out.println("METAMAP_HOST: " + host.trim() + ", METAMAP_PORT:" + port);
         oMmapi = new MetaMapApiImpl( host.trim(), port, 0 );
+        //oMmapi = new MetaMapApiImpl( host.trim() );
         //setupOptions("-y -R SNOMEDCT_US");
+        //TEST
+        /*String s = "";
+        System.out.println(s);
+        String textNonAscii = replaceUTF8.replaceLooklike(s);
+        System.out.println(textNonAscii);*/
+
     }
 
     public void setupOptions(String options) {

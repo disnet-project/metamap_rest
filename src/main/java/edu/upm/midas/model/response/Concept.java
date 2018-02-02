@@ -17,6 +17,8 @@ public class Concept {
     private String cui;/*Código cui*/
     private String name;
     private List<String> semanticTypes;
+    private List<String> matchedWords;
+    private String positionalInfo;
 
 
     public String getName() {
@@ -43,6 +45,21 @@ public class Concept {
         this.semanticTypes = semanticTypes;
     }
 
+    public List<String> getMatchedWords() {
+        return matchedWords;
+    }
+
+    public void setMatchedWords(List<String> matchedWords) {
+        this.matchedWords = matchedWords;
+    }
+
+    public String getPositionalInfo() {
+        return positionalInfo;
+    }
+
+    public void setPositionalInfo(String positionalInfo) {
+        this.positionalInfo = positionalInfo;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -55,6 +72,17 @@ public class Concept {
     @Override
     public int hashCode() {
         return Objects.hash(getCui());
+    }
+
+    @Override
+    public String toString() {
+        return "Concept{" +
+                "cui='" + cui + '\'' +
+                ", name='" + name + '\'' +
+                ", semanticTypes=" + semanticTypes +
+                ", matchedWords=" + matchedWords +
+                ", positionalInfo='" + positionalInfo + '\'' +
+                '}';
     }
 
 }

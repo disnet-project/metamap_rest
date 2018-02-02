@@ -1,7 +1,6 @@
 package edu.upm.midas.constants;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -250,6 +249,8 @@ public class Constants {
         put("vita", "Vitamin");
         put("vtbt", "Vertebrate");
     }};
+
+    public final static String MM_OPTION_RESOURCE_LIST = "-R";
 
     public static final String LOCALHOST = "localhost";
 
