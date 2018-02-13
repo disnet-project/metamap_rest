@@ -260,6 +260,8 @@ public class Constants {
     public final static String OK = "OK";
     public final static String RESPONSE_INVALID_SOURCES = "Invalid source list";
     public final static String RESPONSE_SEMANTIC_TYPES = "Invalid semantic type list";
+    public final static String RESPONSE_NO_RESOURCE_SPECIFIED = "No resource is specified";
+    public final static String RESPONSE_OPTION_MENUS_R_NOT_SPECIFIED = "If you specify sources, it is necessary to use Metamap -R";
 
     public String ERR_CODE_000 = "000";
     public String ERR_CODE_001 = "001";

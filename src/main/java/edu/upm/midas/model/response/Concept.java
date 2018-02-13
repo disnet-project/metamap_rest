@@ -1,5 +1,7 @@
 package edu.upm.midas.model.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +19,9 @@ public class Concept {
     private String cui;/*Código cui*/
     private String name;
     private List<String> semanticTypes;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> matchedWords;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String positionalInfo;
 
 

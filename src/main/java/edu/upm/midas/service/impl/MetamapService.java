@@ -48,12 +48,15 @@ public class MetamapService {
 */
             if (response.getValidationMesssage().equals(Constants.OK)) {
                 String sources = getSourceFormat(response.getConfiguration().getSources());
+                String options = "";
                 if (!common.isEmpty(sources)){//Si existen sources agregará la configuración -R de metamap y la eliminará
                                               // de las opciones, si es que existe
                     sources = Constants.MM_OPTION_RESOURCE_LIST + " " + sources;
-                    request.getConfiguration().getOptions().replace(Constants.MM_OPTION_RESOURCE_LIST, "");
+                    options = request.getConfiguration().getOptions().replace(Constants.MM_OPTION_RESOURCE_LIST, "") + sources;
+                }else{
+                    options = request.getConfiguration().getOptions().replace(Constants.MM_OPTION_RESOURCE_LIST, "");
                 }
-                metamap.setupOptions(request.getConfiguration().getOptions() + " " + sources);
+                metamap.setupOptions(options);
                 metamap.setSemanticTypes(request.getConfiguration().getSemanticTypes());
 
                 int countText = 1;
@@ -71,8 +74,10 @@ public class MetamapService {
                             concept.setCui(conceptEv.getConceptId());
                             concept.setName(conceptEv.getConceptName());
                             concept.setSemanticTypes(conceptEv.getSemanticTypes());
-                            concept.setMatchedWords(conceptEv.getMatchedWords());
-                            concept.setPositionalInfo(conceptEv.getPositionalInfo().toString());
+                            if (request.getConfiguration().isConcept_location()) {
+                                concept.setMatchedWords(conceptEv.getMatchedWords());
+                                concept.setPositionalInfo(conceptEv.getPositionalInfo().toString());
+                            }
                             //System.out.println("getMatchedWords: "+conceptEv.getMatchedWords().toString());//OK
                             //System.out.println("getPositionalInfo: "+conceptEv.getPositionalInfo().toString());//OK
                             //System.out.println("getMatchMapList: "+conceptEv.getMatchMapList().toString());//NO
@@ -85,14 +90,14 @@ public class MetamapService {
 
                             conceptList.add(concept);
                         }// busqueda de conceptos con metamap
-                        if (conceptList.size() <= 0) System.out.println( "   Concept not found in the text...");
+                        if (conceptList.size() <= 0) System.out.println( "   Concepts not found in the text...");
                         text.setConcepts(conceptList);
                         textList.add(text);
                     }// validación del texto no vacío
                     countText++;
                 }// recorrido de textos enviados
-                response.setTextList(textList);
             }
+            response.setTextList(textList);
 /*
         }
 */
@@ -105,7 +110,7 @@ public class MetamapService {
      * @param request
      * @return
      */
-    public Response validate(Request request, HttpServletRequest httpRequest, Device device){
+    public Response validate(Request request, HttpServletRequest httpRequest, Device device) throws Exception {
         Response response = new Response();
         //Validación de autorización para operar con esta api
         //NO necesita ser autorizada, porque es para uso interno, no público
@@ -129,6 +134,17 @@ public class MetamapService {
                 response.setValidationMesssage(Constants.OK);
             } else {
                 response.setValidationMesssage(Constants.RESPONSE_SEMANTIC_TYPES);
+            }
+
+            String sources = getSourceFormat(response.getConfiguration().getSources());
+            String options = "";
+            if (common.isEmpty(sources)){//Si existen sources agregará la configuración -R de metamap y la eliminará
+                boolean contains = request.getConfiguration().getOptions().contains(Constants.MM_OPTION_RESOURCE_LIST);
+                //System.out.println(contains);
+                if (contains) response.setValidationMesssage(Constants.RESPONSE_NO_RESOURCE_SPECIFIED);
+            }else{
+                boolean contains = request.getConfiguration().getOptions().contains(Constants.MM_OPTION_RESOURCE_LIST);
+                if (!contains) response.setValidationMesssage(Constants.RESPONSE_OPTION_MENUS_R_NOT_SPECIFIED);
             }
 /*
         }
@@ -160,10 +176,14 @@ public class MetamapService {
      * @param sources
      * @return
      */
-    public boolean isAValidSourceList(List<String> sources){
+    public boolean isAValidSourceList(List<String> sources) throws Exception{
         boolean valid = false;
-        for (String source: sources) {
-            valid = !Constants.SOURCES_MAP.get( source ).isEmpty();
+        try {
+            for (String source : sources) {
+                valid = !Constants.SOURCES_MAP.get(source).isEmpty();
+            }
+        }catch (Exception ex){
+            valid = false;
         }
         return valid;
     }
@@ -175,10 +195,14 @@ public class MetamapService {
      * @param semanticTypes
      * @return
      */
-    public boolean isAValidSemanticTypesList(List<String> semanticTypes){
+    public boolean isAValidSemanticTypesList(List<String> semanticTypes) throws Exception{
         boolean valid = false;
-        for (String semanticType: semanticTypes) {
-            valid = !Constants.SEMANTIC_TYPES_MAP.get( semanticType ).isEmpty();
+        try {
+            for (String semanticType : semanticTypes) {
+                valid = !Constants.SEMANTIC_TYPES_MAP.get(semanticType).isEmpty();
+            }
+        }catch (Exception ex){
+            valid = false;
         }
         return valid;
     }

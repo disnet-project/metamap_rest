@@ -43,6 +43,7 @@ public class Metamap implements NLPInterface {
         oMmapi = new MetaMapApiImpl( host.trim(), port, 0 );
         //oMmapi = new MetaMapApiImpl( host.trim() );
         //setupOptions("-y -R SNOMEDCT_US");
+        //setupOptions(default_options);
         //TEST
         /*String s = "";
         System.out.println(s);
@@ -59,6 +60,7 @@ public class Metamap implements NLPInterface {
         this.semanticTypes = semanticTypes;
     }
 
+
     /**
      * Method to process the UMLS terms loaded in a disease.
      *
@@ -72,7 +74,7 @@ public class Metamap implements NLPInterface {
         ArrayList<Ev> conceptsList = new ArrayList<Ev>();
         List<Result> citationsList = oMmapi
                 .processCitationsFromString( signs_symptoms_text );
-
+        //System.out.println("OptionsFinal: "+oMmapi.getOptions());
         for (int j = 0; j < citationsList.size(); j++) {
             Result result = citationsList.get(j);
             for (Utterance utterance : result.getUtteranceList()) {
