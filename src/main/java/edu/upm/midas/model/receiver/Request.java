@@ -1,6 +1,5 @@
 package edu.upm.midas.model.receiver;
 import edu.upm.midas.constants.Constants;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -31,6 +30,8 @@ public class Request {
     @NotNull(message = Constants.ERR_NO_PARAMETER)
     @Size(min = 1, message = Constants.ERR_EMPTY_PARAMETER)
     private List<Text> textList;
+    private String snapshot;
+    private String source;
 
 
 /*
@@ -57,5 +58,31 @@ public class Request {
 
     public void setTextList(List<Text> textList) {
         this.textList = textList;
+    }
+
+    public String getSnapshot() {
+        return snapshot;
+    }
+
+    public void setSnapshot(String snapshot) {
+        this.snapshot = snapshot;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                ", configuration=" + configuration +
+                ", textList=" + textList +
+                ", snapshot='" + snapshot + '\'' +
+                ", source='" + source + '\'' +
+                '}';
     }
 }

@@ -1,8 +1,14 @@
 package edu.upm.midas.common.util;
 
+import com.google.gson.Gson;
+import edu.upm.midas.constants.Constants;
+import edu.upm.midas.model.response.ProcessedText;
+import edu.upm.midas.model.response.Text;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Component;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +26,57 @@ import java.util.regex.Pattern;
  */
 @Component
 public class Common {
+
+    /**
+     * @param jsonBody
+     * @param snapshot
+     * @param source
+     * @throws IOException
+     */
+    public void writeJSONFile(String jsonBody, String snapshot, String source) throws IOException {
+        String fileName = snapshot + "_" + source + Constants.MM_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
+        String path = Constants.MM_RETRIEVAL_HISTORY_FOLDER + fileName;
+        InputStream in = getClass().getResourceAsStream(path);
+        //BufferedReader bL = new BufferedReader(new InputStreamReader(in));
+        File file = new File(path);
+        BufferedWriter bW;
+
+        if (!file.exists()){
+            bW = new BufferedWriter(new FileWriter(file));
+            bW.write(jsonBody);
+            bW.close();
+        }
+    }
+
+
+    /**
+     * @param snapshot
+     * @return
+     * @throws Exception
+     */
+    public List<Text> readMetamapResponseJSON(String snapshot, String source) throws Exception {
+        List<Text> texts = new ArrayList<>();
+        System.out.println("Read JSON!...");
+        Gson gson = new Gson();
+        String fileName = snapshot + "_" + source + Constants.MM_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
+        String path = Constants.MM_RETRIEVAL_HISTORY_FOLDER + fileName;
+        System.out.println("Read JSON!..." + path);
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            ProcessedText resp = gson.fromJson(br, ProcessedText.class);
+            texts = resp.getTexts();
+        }catch (Exception e){
+            System.out.println("Error to read or convert JSON!...");
+        }
+
+        /*for (edu.upm.midas.data.validation.metamap.model.response.Text text: resp.getTexts()) {
+            System.out.println("TextId: " + text.getId() + " | Concepts: " + text.getConcepts().toString());
+        }*/
+        //System.out.println("source: "+source);
+
+        return texts;
+    }
 
     public boolean isEmpty(String string) {
         if (string == null) {

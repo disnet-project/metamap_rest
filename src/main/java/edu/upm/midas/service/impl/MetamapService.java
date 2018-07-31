@@ -124,6 +124,7 @@ public class MetamapService {
             boolean validSemanticTypeList = isAValidSemanticTypesList(request.getConfiguration().getSemanticTypes());
 
             response.setConfiguration(request.getConfiguration());
+            response.getConfiguration().setConcept_location( request.getConfiguration().isConcept_location() );
             if (validSourceList) {
                 response.setValidationMesssage(Constants.OK);
             } else {

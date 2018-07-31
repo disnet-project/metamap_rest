@@ -257,6 +257,12 @@ public class Constants {
     public final static String ERR_NO_PARAMETER = "No parameter was sent";
     public final static String ERR_EMPTY_PARAMETER = "Empty parameter";
 
+    public static final String EXTRACTION_HISTORY_FOLDER = "tmp/mm/";
+
+    public static final String MM_RETRIEVAL_HISTORY_FOLDER = "tmp/mm/";
+    public static final String MM_RETRIEVAL_FILE_NAME = "_metamap_filter";
+    public static final String DOT_JSON = ".json";
+
     public final static String OK = "OK";
     public final static String RESPONSE_INVALID_SOURCES = "Invalid source list";
     public final static String RESPONSE_SEMANTIC_TYPES = "Invalid semantic type list";

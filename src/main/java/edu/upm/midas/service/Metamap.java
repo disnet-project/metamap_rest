@@ -74,6 +74,7 @@ public class Metamap implements NLPInterface {
         ArrayList<Ev> conceptsList = new ArrayList<Ev>();
         List<Result> citationsList = oMmapi
                 .processCitationsFromString( signs_symptoms_text );
+        //System.out.println("text: "+ signs_symptoms_text);
         //System.out.println("OptionsFinal: "+oMmapi.getOptions());
         for (int j = 0; j < citationsList.size(); j++) {
             Result result = citationsList.get(j);
@@ -81,6 +82,7 @@ public class Metamap implements NLPInterface {
                 for (PCM pcm : utterance.getPCMList()) {// Obtener elementos de expresiones metamap
                     for (Mapping map : pcm.getMappingList()) {// Obtiene la lista de terminos Metamap Evaluation (Ev)
                         for (Ev mapEv : map.getEvList()) {// Instancia de Metamap Evaluation (Ev)
+                            //System.out.println(mapEv.toString());
                             if (isAValidSemanticType( mapEv.getSemanticTypes() )) {
                                 conceptsList.add( mapEv );
                             }

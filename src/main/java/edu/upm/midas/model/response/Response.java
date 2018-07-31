@@ -14,11 +14,9 @@ import java.util.List;
  */
 public class Response {
 
-/*
-    private String token;
-    private boolean authorization;
-    private String authorizationMessage;
-*/
+//    private String token;
+//    private boolean authorized;
+//    private String authorizationMessage;
 
     private Configuration configuration;
     private String validationMesssage;
@@ -34,12 +32,12 @@ public class Response {
         this.token = token;
     }
 
-    public boolean isAuthorization() {
-        return authorization;
+    public boolean isAuthorized() {
+        return authorized;
     }
 
-    public void setAuthorization(boolean authorization) {
-        this.authorization = authorization;
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
     }
 
     public String getAuthorizationMessage() {
