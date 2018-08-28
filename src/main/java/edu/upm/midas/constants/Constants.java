@@ -269,6 +269,11 @@ public class Constants {
     public final static String RESPONSE_NO_RESOURCE_SPECIFIED = "No resource is specified";
     public final static String RESPONSE_OPTION_MENUS_R_NOT_SPECIFIED = "If you specify sources, it is necessary to use Metamap -R";
 
+    /**
+     * Linea del piso
+     */
+    public static final String UNDER_SCORE = "_";
+
     public String ERR_CODE_000 = "000";
     public String ERR_CODE_001 = "001";
     public String ERR_CODE_002 = "002";

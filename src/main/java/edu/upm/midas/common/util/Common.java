@@ -34,7 +34,7 @@ public class Common {
      * @throws IOException
      */
     public void writeJSONFile(String jsonBody, String snapshot, String source) throws IOException {
-        String fileName = snapshot + "_" + source + Constants.MM_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
+        String fileName = snapshot + Constants.UNDER_SCORE + source + Constants.MM_RETRIEVAL_FILE_NAME + Constants.DOT_JSON;
         String path = Constants.MM_RETRIEVAL_HISTORY_FOLDER + fileName;
         InputStream in = getClass().getResourceAsStream(path);
         //BufferedReader bL = new BufferedReader(new InputStreamReader(in));
